@@ -1,0 +1,27 @@
+清空所有arp缓存记录：
+
+#！/bin/bash
+for i in $(arp | tail -n +2|tr -s ' ' |cut -d' ' -f1)
+do
+    arp -d $i
+done
+
+#!/bin/bash
+read -p "请输入用户名的前缀：" a 
+read -p "请输入用户的数目：" num
+if (( $num<=10 ))
+then
+        n=0
+        for i in `seq $num`
+        do
+               if useradd $a$i &>/dev/null
+                then
+                        echo "用户$a$i创建成功！"
+                        (( n++ ))
+                        echo "123456"|passwd $a$i --stdin &>/dev/null
+                fi
+        done
+        echo "一共创建的用户数：$n个"
+else
+        echo "最多只能创建10个用户啦！"
+fi
