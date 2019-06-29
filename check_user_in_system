@@ -1,0 +1,14 @@
+#! /bin/sh -
+if test $# -ne 1
+ then echo "Incorrect number of arguments"  
+ 	echo "Usage: ifuser username"
+          else   	user=$1   	
+if who | grep  $user ; then      		
+echo $1 "user is logged on."     
+ 		exit 0   	
+ else      		
+ echo $1 "user is not logged on."      		
+ exit 1   	
+ fi
+fi
+
